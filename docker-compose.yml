@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  # The Node.js application service
+  nodejs:
+    build: .
+    expose:
+      - "3000"
+    restart: always
+    environment:
+      - NODE_ENV=production
+    deploy:
+      #app will work on 1 replicas becouse we don't have devided fronted and backend services like expeanse app we shared on demo 
+      replicas: 3 # Scale the service to 1 instance
+    networks:
+      - app_network
+
+  # The NGINX load balancer service
+  nginx:
+    image: nginx:stable-alpine
+    restart: always
+    ports:
+      - "8000:80"  # Expose port 8000 of the NGINX container to port 80 on the host
+    volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - nodejs  # Ensure the Node.js service is started before NGINX
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
