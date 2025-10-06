@@ -1,15 +1,15 @@
 # Here are your Instructions
 
 
-Nodejs app deployment using docker compose
+NodeJS app deployment using Docker Compose
 
-- git clone the app 
+- git clone https://github.com/Niravtilala3/node-chatapp-with-docker-compose.git
 - run npm i
 - run docker compose up -d 
 
-app will be ruunning on http://localhost:8000/
+The app will be running on http://localhost:8000/
 
 
-then you wnat to stop app run and delete all docker container
-run docker compose down
+Then you want to stop the app from running and delete all Docker containers
+ - run docker compose down
 
